@@ -141,7 +141,7 @@ const MangoLandingPage = () => {
             {/* Hero Section */}
             <section className="relative bg-gradient-to-br from-green-700 via-green-600 to-emerald-800 text-white overflow-hidden py-12 md:py-20 px-4">
                 <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_1px]"></div>
-                <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center relative z-10">
+                <div className="max-w-6xl md:px-5  mx-auto grid grid-cols-1 md:grid-cols-2 gap-5 items-center relative z-10">
 
                     <div className="text-center md:text-left space-y-6">
                         <span className="inline-block bg-orange-500 text-xs md:text-sm font-bold tracking-wide uppercase px-3 py-1 rounded-full animate-pulse">
@@ -160,7 +160,7 @@ const MangoLandingPage = () => {
                         </div>
                     </div>
 
-                    <div className="flex justify-center relative group w-full max-w-[400px] mx-auto">
+                    <div className="flex md:pl-5 justify-center relative group w-full max-w-[350px] mx-auto">
                         {/* Background Blur Glow */}
                         <div className="absolute inset-0 bg-emerald-500 rounded-full filter blur-3xl opacity-30 w-72 h-72 mx-auto my-auto"></div>
 
