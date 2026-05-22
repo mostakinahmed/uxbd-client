@@ -41,21 +41,21 @@ const MangoLandingPage = () => {
 
     // Handle Checkbox Selection
     const handleCheckboxChange = (id) => {
-        setPackages(packages.map(pkg => 
+        setPackages(packages.map(pkg =>
             pkg.id === id ? { ...pkg, selected: !pkg.selected } : pkg
         ));
     };
 
     // Increment Weight
     const incrementQty = (id) => {
-        setPackages(packages.map(pkg => 
+        setPackages(packages.map(pkg =>
             pkg.id === id ? { ...pkg, quantity: pkg.quantity + 1 } : pkg
         ));
     };
 
     // Decrement Weight (Strictly stays above minimum bundle threshold)
     const decrementQty = (id) => {
-        setPackages(packages.map(pkg => 
+        setPackages(packages.map(pkg =>
             pkg.id === id && pkg.quantity > pkg.minQty ? { ...pkg, quantity: pkg.quantity - 1 } : pkg
         ));
     };
@@ -82,7 +82,7 @@ const MangoLandingPage = () => {
             alert("অনুগ্রহ করে অন্তত একটি আমের প্যাকেজ নির্বাচন করুন।");
             return;
         }
-        
+
         alert(`ধন্যবাদ ${formData.name}! আপনার মোট ৳${grandTotal} টাকার অর্ডারটি সফলভাবে গৃহীত হয়েছে।`);
         console.log("Order Submitted: ", { formData, selectedPackages, shippingCost, grandTotal });
     };
@@ -94,10 +94,10 @@ const MangoLandingPage = () => {
             <header className="bg-white shadow-sm sticky top-0 z-50">
                 <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
                     <div className="flex items-center gap-2">
-                        <span className="text-3xl">🥭</span>
-                        <span className="text-2xl font-black text-green-600 tracking-tight">Unique<span className="text-orange-500">ExpressBD</span></span>
+                        <span className="md:text-3xl text-2xl">🥭</span>
+                        <span className="md:text-2xl text-xl font-black text-green-600 tracking-tight">Unique<span className="text-orange-500">ExpressBD</span></span>
                     </div>
-                    <a href="#order" className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-5 py-2.5 rounded-full transition-all duration-200 transform hover:scale-105 shadow-md text-sm md:text-base">
+                    <a href="#order" className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-4 py-2 rounded-full transition-all duration-200 transform hover:scale-105 shadow-md text-[14px] md:text-base">
                         অর্ডার করুন
                     </a>
                 </div>
@@ -107,7 +107,7 @@ const MangoLandingPage = () => {
             <section className="relative bg-gradient-to-br from-green-700 via-green-600 to-emerald-800 text-white overflow-hidden py-12 md:py-20 px-4">
                 <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_1px]"></div>
                 <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center relative z-10">
-                    
+
                     <div className="text-center md:text-left space-y-6">
                         <span className="inline-block bg-orange-500 text-xs md:text-sm font-bold tracking-wide uppercase px-3 py-1 rounded-full animate-pulse">
                             ১০০% ন্যাচারাল ও কেমিক্যাল মুক্ত
@@ -115,11 +115,11 @@ const MangoLandingPage = () => {
                         <h1 className="text-4xl md:text-6xl font-black leading-tight drop-shadow-sm">
                             সরাসরি রাজশাহীর বাগান থেকে <span className="text-orange-400">ফ্রেশ আম</span> আপনার দরজায়!
                         </h1>
-                        <p className="text-emerald-100 text-lg md:text-xl font-medium leading-relaxed max-w-lg">
-                            গাছপাকা অতুলনীয় মিষ্টি ও সুস্বাদু আমের আসল স্বাদ নিতে আজই আপনার পছন্দের প্যাকেজটি বুকিং করুন। 
+                        <p className="text-emerald-100 text-md md:text-xl font-medium leading-relaxed max-w-lg">
+                            গাছপাকা অতুলনীয় মিষ্টি ও সুস্বাদু আমের আসল স্বাদ নিতে আজই আপনার পছন্দের প্যাকেজটি বুকিং করুন।
                         </p>
                         <div className="pt-2">
-                            <a href="#order" className="inline-block bg-orange-500 hover:bg-orange-600 text-white text-xl md:text-2xl font-extrabold px-10 py-4 rounded-xl shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                            <a href="#order" className="inline-block bg-orange-500 hover:bg-orange-600 text-white text-lg md:text-2xl font-extrabold px-10 md:py-4 py-2.5 rounded-xl shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                                 অর্ডার করতে ক্লিক করুন ➔
                             </a>
                         </div>
@@ -128,7 +128,7 @@ const MangoLandingPage = () => {
                     <div className="flex justify-center relative">
                         <div className="absolute inset-0 bg-emerald-500 rounded-full filter blur-3xl opacity-30 w-72 h-72 mx-auto my-auto"></div>
                         <img
-                            src="https://i.ibb.co/8x6V4N2/mango.png"
+                            src="https://scontent.fdac110-1.fna.fbcdn.net/v/t39.30808-6/305219786_430802175823626_6234519217026664526_n.png?_nc_cat=107&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=8cKPzORpMM4Q7kNvwH4sZQW&_nc_oc=AdrT2XTUG66WmtXsUt7IhcPka4wPdZbWaXDA2C6UEzPbIZlUZLTFeVKSwdSMBBHJ864&_nc_zt=23&_nc_ht=scontent.fdac110-1.fna&_nc_gid=-K9gw8IJNQVTglllaxcu-A&_nc_ss=7b2a8&oh=00_Af6qZ8EpRnsKXtQ8r4Ku5Jg0IH_pEClPmX-xfyVQVEBMPA&oe=6A15C2D4"
                             alt="Fresh Rajshahi Mangoes"
                             className="w-[350px] max-w-full drop-shadow-2xl relative z-10 transform hover:scale-105 transition-transform duration-500"
                         />
@@ -190,8 +190,8 @@ const MangoLandingPage = () => {
             </section>
 
             {/* Order Checkout Section Container */}
-            <main id="order" className="max-w-6xl mx-auto px-4 py-16">
-                
+            <main id="order" className="max-w-6xl mx-auto px-4 py-10">
+
                 <div className="bg-white border border-gray-200 shadow-2xl rounded-3xl overflow-hidden">
                     {/* Checkout Top Bar Banner */}
                     <div className="bg-gradient-to-r from-green-600 to-emerald-600 text-white text-center py-6 px-4">
@@ -202,13 +202,13 @@ const MangoLandingPage = () => {
                     </div>
 
                     <form onSubmit={handleSubmitOrder} className="grid grid-cols-1 lg:grid-cols-12 gap-0">
-                        
+
                         {/* LEFT SIDE: Input Form and Product Picker */}
                         <div className="lg:col-span-7 p-6 md:p-10 border-b lg:border-b-0 lg:border-r border-gray-200 space-y-8">
-                            
+
                             {/* Billing details Form */}
                             <div>
-                                <h3 className="text-2xl font-black text-gray-900 mb-6 flex items-center gap-2">
+                                <h3 className="md:text-2xl text-xl font-black text-gray-900 mb-6 flex items-center gap-2">
                                     <span className="w-2 h-6 bg-orange-500 rounded-full inline-block"></span>
                                     ১. কাস্টমার ইনফরমেশন
                                 </h3>
@@ -223,7 +223,7 @@ const MangoLandingPage = () => {
                                             value={formData.name}
                                             onChange={handleInputChange}
                                             placeholder="যেমন: মোঃ আসিফ রহমান"
-                                            className="w-full border border-gray-300 bg-gray-50 px-4 py-3.5 rounded-xl outline-none focus:bg-white focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                                            className="w-full border border-gray-300 bg-gray-50 px-4 py-2.5 rounded-xl outline-none focus:bg-white focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
                                         />
                                     </div>
 
@@ -236,7 +236,7 @@ const MangoLandingPage = () => {
                                             value={formData.address}
                                             onChange={handleInputChange}
                                             placeholder="বাসা নং, রোড নং, থানা, জেলা উল্লেখ করুন"
-                                            className="w-full border border-gray-300 bg-gray-50 px-4 py-3.5 rounded-xl outline-none focus:bg-white focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                                            className="w-full border border-gray-300 bg-gray-50 px-4 py-2.5 rounded-xl outline-none focus:bg-white focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
                                         />
                                     </div>
 
@@ -249,7 +249,7 @@ const MangoLandingPage = () => {
                                             value={formData.phone}
                                             onChange={handleInputChange}
                                             placeholder="১১ ডিজিটের সচল মোবাইল নাম্বার"
-                                            className="w-full border border-gray-300 bg-gray-50 px-4 py-3.5 rounded-xl outline-none focus:bg-white focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                                            className="w-full border border-gray-300 bg-gray-50 px-4 py-2.5 rounded-xl outline-none focus:bg-white focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
                                         />
                                     </div>
 
@@ -269,23 +269,22 @@ const MangoLandingPage = () => {
 
                             {/* Product Package Picker */}
                             <div>
-                                <h3 className="text-2xl font-black text-gray-900 mb-6 flex items-center gap-2">
+                                <h3 className="md:text-2xl text-xl font-black text-gray-900 mb-6 flex items-center gap-2">
                                     <span className="w-2 h-6 bg-orange-500 rounded-full inline-block"></span>
                                     ২. আমের প্যাকেজ নির্বাচন করুন
                                 </h3>
 
                                 <div className="space-y-4">
                                     {packages.map((pkg) => (
-                                        <div 
-                                            key={pkg.id} 
-                                            className={`border rounded-2xl p-4 md:p-5 transition-all flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white ${
-                                                pkg.selected ? "border-green-500 bg-green-50/30 ring-1 ring-green-500" : "border-gray-200"
-                                            }`}
+                                        <div
+                                            key={pkg.id}
+                                            className={`border rounded-2xl p-4 md:p-5 transition-all flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white ${pkg.selected ? "border-green-500 bg-green-50/30 ring-1 ring-green-500" : "border-gray-200"
+                                                }`}
                                         >
                                             {/* Left side info */}
                                             <div className="flex items-start gap-3">
-                                                <input 
-                                                    type="checkbox" 
+                                                <input
+                                                    type="checkbox"
                                                     id={`pkg-${pkg.id}`}
                                                     checked={pkg.selected}
                                                     onChange={() => handleCheckboxChange(pkg.id)}
@@ -301,7 +300,7 @@ const MangoLandingPage = () => {
                                             {pkg.selected && (
                                                 <div className="flex items-center justify-between w-full md:w-auto gap-4 pt-3 md:pt-0 border-t md:border-t-0 border-gray-100">
                                                     <div className="flex items-center border border-gray-300 rounded-xl bg-white overflow-hidden shadow-sm">
-                                                        <button 
+                                                        <button
                                                             type="button"
                                                             onClick={() => decrementQty(pkg.id)}
                                                             className="px-4 py-2 bg-gray-50 hover:bg-gray-100 font-bold text-gray-600 border-r transition"
@@ -311,7 +310,7 @@ const MangoLandingPage = () => {
                                                         <span className="px-5 font-bold text-gray-800 text-center min-w-[50px]">
                                                             {pkg.quantity} কেজি
                                                         </span>
-                                                        <button 
+                                                        <button
                                                             type="button"
                                                             onClick={() => incrementQty(pkg.id)}
                                                             className="px-4 py-2 bg-gray-50 hover:bg-gray-100 font-bold text-gray-600 border-l transition"
@@ -333,22 +332,22 @@ const MangoLandingPage = () => {
 
                         {/* RIGHT SIDE: Final Order Summary Receipt */}
                         <div className="lg:col-span-5 bg-gray-50/80 p-6 md:p-10 flex flex-col justify-between">
-                            
+
                             <div>
-                                <h3 className="text-2xl font-black text-gray-900 mb-6 flex items-center gap-2">
+                                <h3 className="md:text-2xl text-xl font-black text-gray-900 mb-6 flex items-center gap-2">
                                     <span className="w-2 h-6 bg-green-600 rounded-full inline-block"></span>
                                     ৩. আপনার অর্ডার সামারি
                                 </h3>
 
                                 <div className="bg-white border border-gray-200/80 rounded-2xl p-5 shadow-sm space-y-4">
-                                    
+
                                     {/* Selected Products List */}
                                     <div className="border-b border-gray-100 pb-4 space-y-3">
                                         <div className="flex justify-between font-bold text-gray-500 text-sm tracking-wide">
                                             <span>আইটেম</span>
                                             <span>মূল্য</span>
                                         </div>
-                                        
+
                                         {selectedPackages.length === 0 ? (
                                             <p className="text-red-500 font-medium text-sm py-2">কোনো প্যাক সিলেক্ট করা হয়নি!</p>
                                         ) : (
@@ -373,12 +372,12 @@ const MangoLandingPage = () => {
                                         <div className="space-y-2">
                                             <label className="flex items-center justify-between border border-gray-200 p-3 rounded-xl bg-gray-50/50 cursor-pointer hover:bg-white transition">
                                                 <div className="flex items-center gap-2.5">
-                                                    <input 
-                                                        type="radio" 
-                                                        name="shipping" 
-                                                        checked={shippingCost === 60} 
+                                                    <input
+                                                        type="radio"
+                                                        name="shipping"
+                                                        checked={shippingCost === 60}
                                                         onChange={() => setShippingCost(60)}
-                                                        className="h-4 w-4 text-green-600 focus:ring-green-500" 
+                                                        className="h-4 w-4 text-green-600 focus:ring-green-500"
                                                     />
                                                     <span className="font-semibold text-gray-800 text-sm">ঢাকার ভেতরে</span>
                                                 </div>
@@ -387,12 +386,12 @@ const MangoLandingPage = () => {
 
                                             <label className="flex items-center justify-between border border-gray-200 p-3 rounded-xl bg-gray-50/50 cursor-pointer hover:bg-white transition">
                                                 <div className="flex items-center gap-2.5">
-                                                    <input 
-                                                        type="radio" 
-                                                        name="shipping" 
-                                                        checked={shippingCost === 120} 
+                                                    <input
+                                                        type="radio"
+                                                        name="shipping"
+                                                        checked={shippingCost === 120}
                                                         onChange={() => setShippingCost(120)}
-                                                        className="h-4 w-4 text-green-600 focus:ring-green-500" 
+                                                        className="h-4 w-4 text-green-600 focus:ring-green-500"
                                                     />
                                                     <span className="font-semibold text-gray-800 text-sm">ঢাকার বাইরে</span>
                                                 </div>
@@ -423,7 +422,7 @@ const MangoLandingPage = () => {
                             <div className="mt-8 lg:mt-0">
                                 <button
                                     type="submit"
-                                    className="w-full bg-orange-500 hover:bg-orange-600 text-white font-black text-xl py-4 rounded-xl shadow-xl shadow-orange-500/20 active:scale-[0.99] transition-all"
+                                    className="w-full bg-orange-500 hover:bg-orange-600 text-white font-black md:text-xl text-lg py-4 rounded-xl shadow-xl shadow-orange-500/20 active:scale-[0.99] transition-all"
                                 >
                                     অর্ডার নিশ্চিত করুন ৳{grandTotal}
                                 </button>
@@ -443,8 +442,18 @@ const MangoLandingPage = () => {
             {/* Premium Minimalistic Footer */}
             <footer className="bg-gray-900 text-gray-400 text-center py-8 px-4 border-t border-gray-800">
                 <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-sm">
-                    <p>© ২০২৬ PureRajshahi. সর্বস্বত্ব সংরক্ষিত।</p>
-                    <p className="text-gray-500">Design & Developed By UniquExpressBD</p>
+                    <p>© ২০২৬ UniquexpressBD. সর্বস্বত্ব সংরক্ষিত।</p>
+                    <p className="text-gray-500 text-center">
+                        Design & Developed By{" "}
+                        <a
+                            href="https://mostakinahmed.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-600 font-semibold hover:text-blue-800 underline tracking-wider"
+                        >
+                            Mostakin Ahmed
+                        </a>
+                    </p>
                 </div>
             </footer>
 
