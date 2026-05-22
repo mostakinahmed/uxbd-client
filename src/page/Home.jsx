@@ -7,7 +7,7 @@ const MangoLandingPage = () => {
             id: 1,
             name: "রেগুলার ম্যাঙ্গো প্যাক (হিমসাগর + ল্যাংড়া)",
             pricePerKg: 150,
-            quantity: 5, // Default 5 KG
+            quantity: 12, // Default 5 KG
             selected: true,
             minQty: 5
         },
@@ -15,7 +15,7 @@ const MangoLandingPage = () => {
             id: 2,
             name: "প্রিমিয়াম ফ্যামিলি প্যাক (হিমসাগর + ফজলি)",
             pricePerKg: 180,
-            quantity: 10, // Default 10 KG
+            quantity: 12, // Default 10 KG
             selected: false,
             minQty: 5
         },
@@ -23,7 +23,7 @@ const MangoLandingPage = () => {
             id: 3,
             name: "মেগা ফিস্ট উৎসব প্যাক (মিক্সড প্রিমিয়াম আম)",
             pricePerKg: 220,
-            quantity: 20, // Default 20 KG
+            quantity: 12, // Default 20 KG
             selected: false,
             minQty: 10
         }
