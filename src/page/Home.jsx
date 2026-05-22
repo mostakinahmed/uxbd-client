@@ -528,8 +528,8 @@ const MangoLandingPage = () => {
             </main>
 
             {/* Premium Minimalistic Footer */}
-            <footer className="bg-gray-900 text-gray-400 text-center py-8 px-4 border-t border-gray-800">
-                <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-sm">
+            <footer className="bg-gray-900 text-gray-400 text-center md:py-8 py-4 px-4 border-t border-gray-800">
+                <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center md:gap-4 gap-2 text-sm">
                     <p>© ২০২৬ UniquexpressBD. সর্বস্বত্ব সংরক্ষিত।</p>
                     <p className="text-gray-500 text-center">
                         Design & Developed By{" "}
