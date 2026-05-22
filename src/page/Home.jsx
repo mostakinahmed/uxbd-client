@@ -5,7 +5,7 @@ const MangoLandingPage = () => {
     const initialPackages = [
         {
             id: 1,
-            name: "রেগুলার ম্যাঙ্গো প্যাক (হিমসাগর + ল্যাংড়া)",
+            name: "রেগুলার ম্যাঙ্গো প্যাক (হিমসাগর + ল্যাংড়া)",
             pricePerKg: 150,
             quantity: 5, // Default 5 KG
             selected: true,
@@ -21,7 +21,7 @@ const MangoLandingPage = () => {
         },
         {
             id: 3,
-            name: "মেগা ফিস্ট উৎসব প্যাক (মিক্সড প্রিমিয়াম আম)",
+            name: "মেগা ফিস্ট উৎসব প্যাক (মিক্সড প্রিমিয়াম আম)",
             pricePerKg: 220,
             quantity: 20, // Default 20 KG
             selected: false,
@@ -38,6 +38,7 @@ const MangoLandingPage = () => {
         phone: "",
         notes: ""
     });
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
 
     // Handle Checkbox Selection
     const handleCheckboxChange = (id) => {
@@ -75,7 +76,7 @@ const MangoLandingPage = () => {
     const handleSubmitOrder = (e) => {
         e.preventDefault();
         if (!formData.name || !formData.address || !formData.phone) {
-            alert("অনুগ্রহ করে তারকাচিহ্নিত (*) ঘরগুলো পূরণ করুন।");
+            alert("অনুগ্রহ করে তারকাчиহ্নিত (*) ঘরগুলো পূরণ করুন।");
             return;
         }
         if (selectedPackages.length === 0) {
@@ -83,15 +84,49 @@ const MangoLandingPage = () => {
             return;
         }
 
-        alert(`ধন্যবাদ ${formData.name}! আপনার মোট ৳${grandTotal} টাকার অর্ডারটি সফলভাবে গৃহীত হয়েছে।`);
-        console.log("Order Submitted: ", { formData, selectedPackages, shippingCost, grandTotal });
+        // Trigger Success Modal
+        setShowSuccessModal(true);
+        console.log("Order Submitted Successfully: ", { formData, selectedPackages, shippingCost, grandTotal });
+    };
+
+    // Close Modal and Reset Form
+    const handleCloseModal = () => {
+        setShowSuccessModal(false);
+        setFormData({ name: "", address: "", phone: "", notes: "" });
+        setPackages(initialPackages);
+    };
+
+    const sliderImages = [
+        { id: 1, src: "https://scontent.fdac110-1.fna.fbcdn.net/v/t39.30808-6/305219786_430802175823626_6234519217026664526_n.png?_nc_cat=107&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=8cKPzORpMM4Q7kNvwH4sZQW&_nc_oc=AdrT2XTUG66WmtXsUt7IhcPka4wPdZbWaXDA2C6UEzPbIZlUZLTFeVKSwdSMBBHJ864&_nc_zt=23&_nc_ht=scontent.fdac110-1.fna&_nc_gid=-K9gw8IJNQVTglllaxcu-A&_nc_ss=7b2a8&oh=00_Af6qZ8EpRnsKXtQ8r4Ku5Jg0IH_pEClPmX-xfyVQVEBMPA&oe=6A15C2D4", alt: "Fresh Rajshahi Mangoes 1" },
+        { id: 2, src: "https://myzoo.asia/public/uploads/all/OyH3JHeH7wzttc5z2UuYTnAwENmzvVTYPfG0Dcab.png", alt: "Fresh Rajshahi Mangoes 2" },
+        { id: 3, src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZVE3pk10kuMT7BKwvOW38YCux-9QDnPwwSA&s", alt: "Fresh Rajshahi Mangoes 3" },
+        { id: 4, src: "https://service.bdassistant.com/uploads/krjvexvkyr567.jpeg", alt: "Fresh Rajshahi Mangoes 4" },
+        { id: 5, src: "https://giftall.s3.amazonaws.com/uploads/images/product/product_1591113109.jpg", alt: "Fresh Rajshahi Mangoes 5" }
+    ];
+
+    const [currentSlide, setCurrentSlide] = React.useState(0);
+
+    // অটোমেটিক ৩ সেকেন্ড পর পর স্লাইড চেঞ্জ হওয়ার জন্য useEffect
+    React.useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentSlide((prevSlide) => (prevSlide + 1) % sliderImages.length);
+        }, 3000); // 3000ms = 3 Seconds
+        return () => clearInterval(timer);
+    }, []);
+
+    const nextSlide = () => {
+        setCurrentSlide((prev) => (prev + 1) % sliderImages.length);
+    };
+
+    const prevSlide = () => {
+        setCurrentSlide((prev) => (prev - 1 + sliderImages.length) % sliderImages.length);
     };
 
     return (
-        <div className="bg-gray-50 text-gray-800 font-sans min-h-screen selection:bg-green-600 selection:text-white">
+        <div className="bg-gray-50 text-gray-800 font-sans min-h-screen selection:bg-green-600 selection:text-white relative">
 
             {/* Navigation / Brand Header */}
-            <header className="bg-white shadow-sm sticky top-0 z-50">
+            <header className="bg-white shadow-sm sticky top-0 z-40">
                 <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
                     <div className="flex items-center gap-2">
                         <span className="md:text-3xl text-2xl">🥭</span>
@@ -113,10 +148,10 @@ const MangoLandingPage = () => {
                             ১০০% ন্যাচারাল ও কেমিক্যাল মুক্ত
                         </span>
                         <h1 className="text-4xl md:text-6xl font-black leading-tight drop-shadow-sm">
-                            সরাসরি রাজশাহীর বাগান থেকে <span className="text-orange-400">ফ্রেশ আম</span> আপনার দরজায়!
+                            সরাসরি রাজশাহীর বাগান থেকে <span className="text-orange-400">ফ্রেশ আম</span> আপনার দরজায়!
                         </h1>
                         <p className="text-emerald-100 text-md md:text-xl font-medium leading-relaxed max-w-lg">
-                            গাছপাকা অতুলনীয় মিষ্টি ও সুস্বাদু আমের আসল স্বাদ নিতে আজই আপনার পছন্দের প্যাকেজটি বুকিং করুন।
+                            গাছপাকা অতুলনীয় মিষ্টি ও সুস্বাদু আমের আসল স্বাদ নিতে আজই আপনার পছন্দের প্যাকেজটি বুকিং করুন।
                         </p>
                         <div className="pt-2">
                             <a href="#order" className="inline-block bg-orange-500 hover:bg-orange-600 text-white text-lg md:text-2xl font-extrabold px-10 md:py-4 py-2.5 rounded-xl shadow-xl transition-all duration-300 transform hover:-translate-y-1">
@@ -125,14 +160,67 @@ const MangoLandingPage = () => {
                         </div>
                     </div>
 
-                    <div className="flex justify-center relative">
+                    <div className="flex justify-center relative group w-full max-w-[400px] mx-auto">
+                        {/* Background Blur Glow */}
                         <div className="absolute inset-0 bg-emerald-500 rounded-full filter blur-3xl opacity-30 w-72 h-72 mx-auto my-auto"></div>
-                        <img
-                            src="https://scontent.fdac110-1.fna.fbcdn.net/v/t39.30808-6/305219786_430802175823626_6234519217026664526_n.png?_nc_cat=107&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=8cKPzORpMM4Q7kNvwH4sZQW&_nc_oc=AdrT2XTUG66WmtXsUt7IhcPka4wPdZbWaXDA2C6UEzPbIZlUZLTFeVKSwdSMBBHJ864&_nc_zt=23&_nc_ht=scontent.fdac110-1.fna&_nc_gid=-K9gw8IJNQVTglllaxcu-A&_nc_ss=7b2a8&oh=00_Af6qZ8EpRnsKXtQ8r4Ku5Jg0IH_pEClPmX-xfyVQVEBMPA&oe=6A15C2D4"
-                            alt="Fresh Rajshahi Mangoes"
-                            className="w-[350px] max-w-full drop-shadow-2xl relative z-10 transform hover:scale-105 transition-transform duration-500"
-                        />
+
+                        {/* Main Slider Container */}
+                        <div className="relative z-10 w-full overflow-hidden min-h-[250px] md:min-h-[350px] flex items-center justify-center">
+                            {sliderImages.map((image, index) => (
+                                <div
+                                    key={image.id}
+                                    className={`absolute inset-0 flex items-center justify-center transition-all duration-700 ease-in-out transform ${index === currentSlide
+                                            ? "opacity-100 scale-100 translate-x-0"
+                                            : "opacity-0 scale-95 pointer-events-none"
+                                        }`}
+                                >
+                                    <img
+                                        src={image.src}
+                                        alt={image.alt}
+                                        className="w-[350px] max-w-full drop-shadow-2xl object-contain transform hover:scale-105 transition-transform duration-500"
+                                    />
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Left Arrow (মাউস হোভার করলে স্ক্রিনে দেখা যাবে) */}
+                        <button
+                            type="button"
+                            onClick={prevSlide}
+                            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full md:opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                            </svg>
+                        </button>
+
+                        {/* Right Arrow */}
+                        <button
+                            type="button"
+                            onClick={nextSlide}
+                            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full md:opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+
+                        {/* Bottom Dots Nav Indicators */}
+                        <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+                            {sliderImages.map((_, index) => (
+                                <button
+                                    key={index}
+                                    type="button"
+                                    onClick={() => setCurrentSlide(index)}
+                                    className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${index === currentSlide ? "bg-orange-500 w-6" : "bg-white/50"
+                                        }`}
+                                />
+                            ))}
+                        </div>
                     </div>
+
+
+
                 </div>
             </section>
 
@@ -153,7 +241,7 @@ const MangoLandingPage = () => {
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                         </div>
                         <h3 className="text-xl font-bold text-gray-800 mb-2">১০০% কেমিক্যাল মুক্ত</h3>
-                        <p className="text-gray-600 leading-relaxed">কোনো প্রকার প্রিজারভেটিভ, ফরমালিন বা কার্বাইড ছাড়াই প্রাকৃতিকভাবে পাকানো আম।</p>
+                        <p className="text-gray-600 leading-relaxed">কোনো প্রকার প্রিজারভেটিভ, ফরমালিন বা কার্বাইড ছাড়াই প্রাকৃতিকভাবে পাকানো আম।</p>
                     </div>
 
                     {/* Card 2 */}
@@ -162,7 +250,7 @@ const MangoLandingPage = () => {
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M16.243 17.657l.707.707M6.343 6.364l.707-.707M12 5a7 7 0 100 14 7 7 0 000-14z" /></svg>
                         </div>
                         <h3 className="text-xl font-bold text-gray-800 mb-2">বাগান থেকে সরাসরি</h3>
-                        <p className="text-gray-600 leading-relaxed">অর্ডার পাওয়ার পর সরাসরি গাছ থেকে পেড়ে প্যাকিং করে পাঠিয়ে দেওয়া হয়।</p>
+                        <p className="text-gray-600 leading-relaxed">অর্ডার পাওয়ার পর সরাসরি গাছ থেকে পেড়ে প্যাকিং করে পাঠিয়ে দেওয়া হয়।</p>
                     </div>
 
                     {/* Card 3 */}
@@ -171,7 +259,7 @@ const MangoLandingPage = () => {
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
                         </div>
                         <h3 className="text-xl font-bold text-gray-800 mb-2">সুপার ফাস্ট ডেলিভারি</h3>
-                        <p className="text-gray-600 leading-relaxed">সুরক্ষিত কুরিয়ার সার্ভিসের মাধ্যমে সারা বাংলাদেশে দ্রুত ও নিরাপদ কন্ডিশনে হোম ডেলিভারি।</p>
+                        <p className="text-gray-600 leading-relaxed">সুরক্ষিত কুরিয়ার সার্ভিসের মাধ্যমে সারা বাংলাদেশে দ্রুত ও নিরাপদ কন্ডিশনে হোম ডেলিভারি।</p>
                     </div>
                 </div>
             </section>
@@ -181,9 +269,9 @@ const MangoLandingPage = () => {
                 <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-md p-6 md:p-8 flex flex-col md:flex-row items-center gap-6">
                     <div className="text-4xl">💡</div>
                     <div>
-                        <h4 className="text-lg font-bold text-green-700 mb-1">আম খাওয়ার সঠিক নিয়ম:</h4>
+                        <h4 className="text-lg font-bold text-green-700 mb-1">আম খাওয়ার সঠিক নিয়ম:</h4>
                         <p className="text-gray-700 leading-relaxed">
-                            কুরিয়ার থেকে আম পাওয়ার পর ঘরের মেঝেতে কিছুক্ষণ ছড়িয়ে রাখুন। খাওয়ার আগে অন্তত ৩০ মিনিট পরিষ্কার ঠাণ্ডা পানিতে ভিজিয়ে রেখে তারপর কেটে সাবাড় করুন সম্পূর্ণ রসালো ও আসল মিষ্টি স্বাদের তৃপ্তি!
+                            কুরিয়ার থেকে আম পাওয়ার পর ঘরের মেঝেতে কিছুক্ষণ ছড়িয়ে রাখুন। খাওয়ার আগে অন্তত ৩০ মিনিট পরিষ্কার ঠাণ্ডা পানিতে ভিজিয়ে রেখে তারপর কেটে সাবাড় করুন সম্পূর্ণ রসালো ও আসল মিষ্টি স্বাদের তৃপ্তি!
                         </p>
                     </div>
                 </div>
@@ -349,7 +437,7 @@ const MangoLandingPage = () => {
                                         </div>
 
                                         {selectedPackages.length === 0 ? (
-                                            <p className="text-red-500 font-medium text-sm py-2">কোনো প্যাক সিলেক্ট করা হয়নি!</p>
+                                            <p className="text-red-500 font-medium text-sm py-2">কোনো প্যাক সিলেক্ট করা হয়নি!</p>
                                         ) : (
                                             selectedPackages.map(pkg => (
                                                 <div key={pkg.id} className="flex justify-between items-start text-sm md:text-base font-semibold text-gray-800">
@@ -413,7 +501,7 @@ const MangoLandingPage = () => {
                                     <span className="text-xl">🤝</span>
                                     <div>
                                         <h4 className="font-bold text-orange-800 text-sm">ক্যাশ অন ডেলিভারি (COD)</h4>
-                                        <p className="text-xs text-orange-700/90 mt-0.5">পণ্য হাতে পেয়ে যাচাই করে তারপর ডেলিভারি ম্যানকে টাকা পরিশোধ করবেন।</p>
+                                        <p className="text-xs text-orange-700/90 mt-0.5">পণ্য হাতে পেয়ে যাচাই করে তারপর ডেলিভারি ম্যানকে টাকা পরিশোধ করবেন।</p>
                                     </div>
                                 </div>
                             </div>
@@ -456,6 +544,52 @@ const MangoLandingPage = () => {
                     </p>
                 </div>
             </footer>
+
+            {/* SUCCESS MODAL POPUP */}
+            {showSuccessModal && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
+                    <div className="bg-white rounded-3xl p-6 md:p-8 max-w-md w-full text-center shadow-2xl border border-gray-100 transform scale-100 transition-all duration-300">
+
+                        {/* Success Icon Animation */}
+                        <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-5 text-green-600 shadow-inner">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                            </svg>
+                        </div>
+
+                        {/* Heading */}
+                        <h3 className="text-2xl md:text-3xl font-black text-gray-900 mb-2">
+                            অর্ডারটি সফল হয়েছে!
+                        </h3>
+
+                        <p className="text-green-600 font-bold text-lg mb-4">
+                            ধন্যবাদ, {formData.name}!
+                        </p>
+
+                        {/* Brief Summary Box */}
+                        <div className="bg-gray-50 rounded-2xl p-4 text-left text-sm space-y-2 text-gray-600 border border-gray-100 mb-6">
+                            <p><span className="font-bold text-gray-800">ফোন নাম্বার:</span> {formData.phone}</p>
+                            <p><span className="font-bold text-gray-800">ঠিকানা:</span> {formData.address}</p>
+                            <p className="pt-2 border-t border-gray-200 flex justify-between font-extrabold text-base text-gray-900">
+                                <span>মোট বিল (COD):</span>
+                                <span className="text-green-600">৳{grandTotal}</span>
+                            </p>
+                        </div>
+
+                        <p className="text-gray-500 text-sm leading-relaxed mb-6">
+                            আমাদের প্রতিনিধি খুব শীঘ্রই আপনার মোবাইলে কল করে অর্ডারটি কনফার্ম করবেন এবং দ্রুত ডেলিভারির ব্যবস্থা করবেন। অনুগ্রহ করে ফোনটি সচল রাখুন।
+                        </p>
+
+                        {/* Close / Continue Button */}
+                        <button
+                            onClick={handleCloseModal}
+                            className="w-full bg-green-600 hover:bg-green-700 text-white font-bold text-lg py-3.5 rounded-xl shadow-lg shadow-green-600/20 active:scale-[0.98] transition-all"
+                        >
+                            ঠিক আছে, ধন্যবাদ
+                        </button>
+                    </div>
+                </div>
+            )}
 
         </div>
     );
