@@ -201,82 +201,94 @@ const MangoLandingPage = () => {
             </header>
 
             {/* Hero Section */}
-            <section className="relative bg-gradient-to-br from-green-700 via-green-600 to-emerald-800 text-white overflow-hidden py-12 md:py-20 px-4">
-                <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_1px]"></div>
-                <div className="max-w-6xl md:px-5  mx-auto grid grid-cols-1 md:grid-cols-2 gap-5 items-center relative z-10">
+<section className="relative overflow-hidden py-12 md:py-20 px-4 text-white">
 
-                    <div className="text-center md:text-left space-y-6">
-                        <span className="inline-block bg-orange-500 text-xs md:text-sm font-bold tracking-wide uppercase px-3 py-1 rounded-full animate-pulse">
-                            ১০০% ন্যাচারাল ও কেমিক্যাল মুক্ত
-                        </span>
-                        <h1 className="text-4xl md:text-6xl font-black leading-tight drop-shadow-sm">
-                            সরাসরি রাজশাহীর বাগান থেকে <span className="text-orange-400">ফ্রেশ আম</span> আপনার দরজায়!
-                        </h1>
-                        <p className="text-emerald-100 text-md md:text-xl font-medium leading-relaxed max-w-lg">
-                            গাছপাকা অতুলনীয় মিষ্টি ও সুস্বাদু আমের আসল স্বাদ নিতে আজই আপনার পছন্দের প্যাকেজটি বুকিং করুন।
-                        </p>
-                        <div className="pt-2">
-                            <a href="#order" className="inline-block bg-orange-500 hover:bg-orange-600 text-white text-lg md:text-2xl font-extrabold px-10 md:py-4 py-2.5 rounded-xl shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                                অর্ডার করতে ক্লিক করুন ➔
-                            </a>
-                        </div>
+    {/* Background Image */}
+    <div
+        className="absolute inset-0 bg-cover bg-center scale-105 blur-[4px]"
+        style={{
+            backgroundImage:
+                "url('https://7vgva7cju0vcfvwf.public.blob.vercel-storage.com/IMG_20260523_165905.jpg.jpeg')"
+        }}
+    ></div>
+
+    {/* Green Overlay */}
+    
+
+    {/* Pattern Overlay */}
+
+
+    {/* Content */}
+    <div className="max-w-6xl md:px-5 mx-auto grid grid-cols-1 md:grid-cols-2 gap-5 items-center relative z-10">
+
+        {/* LEFT CONTENT */}
+        <div className="text-center md:text-left space-y-6">
+
+            <span className="inline-block bg-orange-500 text-xs md:text-sm font-bold tracking-wide uppercase px-3 py-1 rounded-full animate-pulse">
+                ১০০% ন্যাচারাল ও কেমিক্যাল মুক্ত
+            </span>
+
+            <h1 className="text-4xl md:text-6xl font-black leading-tight drop-shadow-sm">
+                সরাসরি রাজশাহীর বাগান থেকে{" "}
+                <span className="text-orange-400">
+                    ফ্রেশ আম
+                </span>{" "}
+                আপনার দরজায়!
+            </h1>
+
+            <p className="text-emerald-100 text-md md:text-xl font-medium leading-relaxed max-w-lg">
+                গাছপাকা অতুলনীয় মিষ্টি ও সুস্বাদু আমের আসল স্বাদ নিতে আজই আপনার পছন্দের প্যাকেজটি বুকিং করুন।
+            </p>
+
+            <div className="pt-2">
+
+                <a
+                    href="#order"
+                    className="inline-block bg-orange-500 hover:bg-orange-600 text-white text-lg md:text-2xl font-extrabold px-10 md:py-4 py-2.5 rounded-xl shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+                >
+                    অর্ডার করতে ক্লিক করুন ➔
+                </a>
+
+            </div>
+
+        </div>
+
+        {/* RIGHT SLIDER */}
+        <div className=" hidden flex md:pl-5 justify-center relative group w-full max-w-[350px] mx-auto">
+
+            <div className="absolute inset-0 bg-emerald-500 rounded-full filter blur-3xl opacity-30 w-72 h-72 mx-auto my-auto"></div>
+
+            <div className="relative z-10 w-full overflow-hidden min-h-[250px] md:min-h-[350px] flex items-center justify-center">
+
+                {sliderImages.map((image, index) => (
+
+                    <div
+                        key={image.id}
+                        className={`absolute inset-0 flex items-center justify-center transition-all duration-700 ease-in-out transform ${index === currentSlide
+                                ? "opacity-100 scale-100 translate-x-0"
+                                : "opacity-0 scale-95 pointer-events-none"
+                            }`}
+                    >
+
+                        <img
+                            src={image.src}
+                            alt={image.alt}
+                            className="w-[350px] max-w-full drop-shadow-2xl object-contain transform hover:scale-105 transition-transform duration-500"
+                        />
+
                     </div>
 
-                    <div className="flex md:pl-5 justify-center relative group w-full max-w-[350px] mx-auto">
-                        <div className="absolute inset-0 bg-emerald-500 rounded-full filter blur-3xl opacity-30 w-72 h-72 mx-auto my-auto"></div>
+                ))}
 
-                        <div className="relative z-10 w-full overflow-hidden min-h-[250px] md:min-h-[350px] flex items-center justify-center">
-                            {sliderImages.map((image, index) => (
-                                <div
-                                    key={image.id}
-                                    className={`absolute inset-0 flex items-center justify-center transition-all duration-700 ease-in-out transform ${index === currentSlide
-                                        ? "opacity-100 scale-100 translate-x-0"
-                                        : "opacity-0 scale-95 pointer-events-none"
-                                        }`}
-                                >
-                                    <img
-                                        src={image.src}
-                                        alt={image.alt}
-                                        className="w-[350px] max-w-full drop-shadow-2xl object-contain transform hover:scale-105 transition-transform duration-500"
-                                    />
-                                </div>
-                            ))}
-                        </div>
+            </div>
 
-                        <button
-                            type="button"
-                            onClick={prevSlide}
-                            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full md:opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                            </svg>
-                        </button>
+        </div>
 
-                        <button
-                            type="button"
-                            onClick={nextSlide}
-                            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full md:opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                            </svg>
-                        </button>
+    </div>
 
-                        <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2">
-                            {sliderImages.map((_, index) => (
-                                <button
-                                    key={index}
-                                    type="button"
-                                    onClick={() => setCurrentSlide(index)}
-                                    className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${index === currentSlide ? "bg-orange-500 w-6" : "bg-white/50"
-                                        }`}
-                                />
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </section>
+</section>
+
+
 
             {/* Features/Benefits Grid */}
             <section className="max-w-6xl mx-auto px-4 py-16">
@@ -322,7 +334,7 @@ const MangoLandingPage = () => {
                     <div>
                         <h4 className="text-lg font-bold text-green-700 mb-1">আম খাওয়ার সঠিক নিয়ম:</h4>
                         <p className="text-gray-700 leading-relaxed">
-                            কুরিয়ার থেকে আম পাওয়ার পর ঘরের মেঝেতে কিছুক্ষণ ছড়িয়ে রাখুন। খাওয়ার আগে অন্তত ৩০ মিনিট পরিষ্কার ঠাণ্ডা পানিতে ভিজিয়ে রেখে তারপর কেটে সাবাড় করুন সম্পূর্ণ রসালো ও আসল মিষ্টি স্বাদের তৃপ্তি!
+                        কুরিয়ার থেকে আম পাওয়ার পর ঘরের মেঝেতে ছড়িয়ে রাখুন। ভালোভাবে আম পাকার পরে কেটে সাবাড় করুন সম্পূর্ণ রসালো ও আসল মিষ্টি স্বাদের তৃপ্তি পাবেন!
                         </p>
                     </div>
                 </div>
