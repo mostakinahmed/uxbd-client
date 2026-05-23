@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import axios from "axios"; // ⚡ এই লাইনটি ফাইলের একদম উপরে যুক্ত করুন
 const MangoLandingPage = () => {
     // Packages Data
     const initialPackages = [
@@ -7,7 +7,7 @@ const MangoLandingPage = () => {
             id: 1,
             name: "রেগুলার ম্যাঙ্গো প্যাক (হিমসাগর + ল্যাংড়া)",
             pricePerKg: 150,
-            quantity: 12, // Default 5 KG
+            quantity: 12,
             selected: true,
             minQty: 5
         },
@@ -15,7 +15,7 @@ const MangoLandingPage = () => {
             id: 2,
             name: "প্রিমিয়াম ফ্যামিলি প্যাক (হিমসাগর + ফজলি)",
             pricePerKg: 180,
-            quantity: 12, // Default 10 KG
+            quantity: 12,
             selected: false,
             minQty: 5
         },
@@ -23,7 +23,7 @@ const MangoLandingPage = () => {
             id: 3,
             name: "মেগা ফিস্ট উৎসব প্যাক (মিক্সড প্রিমিয়াম আম)",
             pricePerKg: 220,
-            quantity: 12, // Default 20 KG
+            quantity: 12,
             selected: false,
             minQty: 10
         }
@@ -39,6 +39,7 @@ const MangoLandingPage = () => {
         notes: ""
     });
     const [showSuccessModal, setShowSuccessModal] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false); // সাবমিশন লোডিং স্টেট
 
     // Handle Checkbox Selection
     const handleCheckboxChange = (id) => {
@@ -72,11 +73,15 @@ const MangoLandingPage = () => {
     const subtotal = selectedPackages.reduce((sum, pkg) => sum + (pkg.pricePerKg * pkg.quantity), 0);
     const grandTotal = subtotal > 0 ? subtotal + shippingCost : 0;
 
-    // Form Submit Action
-    const handleSubmitOrder = (e) => {
+    // ========================================================
+    // BACKEND API INTEGRATION (Form Submit Action)
+    // ========================================================
+    const handleSubmitOrder = async (e) => {
         e.preventDefault();
+
+        // প্রাইমারি ভ্যালিডেশন চেক
         if (!formData.name || !formData.address || !formData.phone) {
-            alert("অনুগ্রহ করে তারকাчиহ্নিত (*) ঘরগুলো পূরণ করুন।");
+            alert("অনুগ্রহ করে তারকাচিহ্নিত (*) ঘরগুলো পূরণ করুন।");
             return;
         }
         if (selectedPackages.length === 0) {
@@ -84,9 +89,48 @@ const MangoLandingPage = () => {
             return;
         }
 
-        // Trigger Success Modal
-        setShowSuccessModal(true);
-        console.log("Order Submitted Successfully: ", { formData, selectedPackages, shippingCost, grandTotal });
+        setIsSubmitting(true);
+
+        // ব্যাকএন্ড মডেলের রিকোয়েস্ট বডি বা পেলোড ফরম্যাট
+        const orderPayload = {
+            name: formData.name,
+            address: formData.address,
+            phone: formData.phone,
+            notes: formData.notes,
+            // একাধিক প্যাক সিলেক্ট করলে সবগুলোকে ব্যাকএন্ডে অ্যারে আকারে পাঠানো হচ্ছে
+            items: selectedPackages.map(pkg => ({
+                name: pkg.name,
+                quantity: pkg.quantity,
+                price: pkg.pricePerKg * pkg.quantity
+            })),
+            shippingCost: shippingCost,
+            grandTotal: grandTotal
+            // নোট: id, status, date ব্যাকএন্ডে মঙ্গুস স্কিমা থেকে অটো জেনারেট হবে।
+        };
+
+        try {
+            console.log(orderPayload);
+            
+            // Axios.post সরাসরি URL এবং পেলোড অবজেক্ট ইনপুট নেয়
+            const response = await axios.post("https://uxbd.vercel.app/api/orders", orderPayload);
+
+            // Axios-এর রেসপন্স ডাটা সরাসরি .data প্রপার্টিতে থাকে
+            const result = response.data;
+
+            if (result.success) {
+                // সফল হলে সাকসেস মোডাল পপ-আপ ট্রিগার হবে
+                setShowSuccessModal(true);
+            } else {
+                alert(result.message || "অর্ডার প্রসেস করতে সমস্যা হয়েছে। আবার চেষ্টা করুন।");
+            }
+        } catch (error) {
+            console.error("API Error Response:", error);
+            // Axios-এর সার্ভার সাইড এরর মেসেজ ধরার জন্য error.response?.data?.message ব্যবহার করা ভালো
+            const errMsg = error.response?.data?.message || "সার্ভার কানেকশন এরর! অনুগ্রহ করে ব্যাকএন্ড রান আছে কিনা চেক করুন।";
+            alert(errMsg);
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     // Close Modal and Reset Form
@@ -104,15 +148,15 @@ const MangoLandingPage = () => {
         { id: 5, src: "https://giftall.s3.amazonaws.com/uploads/images/product/product_1591113109.jpg", alt: "Fresh Rajshahi Mangoes 5" }
     ];
 
-    const [currentSlide, setCurrentSlide] = React.useState(0);
+    const [currentSlide, setCurrentSlide] = useState(0);
 
-    // অটোমেটিক ৩ সেকেন্ড পর পর স্লাইড চেঞ্জ হওয়ার জন্য useEffect
+    // অটোমেটিক ৩ সেকেন্ড পর পর স্লাইড চেঞ্জ হওয়ার জন্য useEffect
     React.useEffect(() => {
         const timer = setInterval(() => {
             setCurrentSlide((prevSlide) => (prevSlide + 1) % sliderImages.length);
-        }, 3000); // 3000ms = 3 Seconds
+        }, 3000);
         return () => clearInterval(timer);
-    }, []);
+    }, [sliderImages.length]);
 
     const nextSlide = () => {
         setCurrentSlide((prev) => (prev + 1) % sliderImages.length);
@@ -161,17 +205,15 @@ const MangoLandingPage = () => {
                     </div>
 
                     <div className="flex md:pl-5 justify-center relative group w-full max-w-[350px] mx-auto">
-                        {/* Background Blur Glow */}
                         <div className="absolute inset-0 bg-emerald-500 rounded-full filter blur-3xl opacity-30 w-72 h-72 mx-auto my-auto"></div>
 
-                        {/* Main Slider Container */}
                         <div className="relative z-10 w-full overflow-hidden min-h-[250px] md:min-h-[350px] flex items-center justify-center">
                             {sliderImages.map((image, index) => (
                                 <div
                                     key={image.id}
                                     className={`absolute inset-0 flex items-center justify-center transition-all duration-700 ease-in-out transform ${index === currentSlide
-                                            ? "opacity-100 scale-100 translate-x-0"
-                                            : "opacity-0 scale-95 pointer-events-none"
+                                        ? "opacity-100 scale-100 translate-x-0"
+                                        : "opacity-0 scale-95 pointer-events-none"
                                         }`}
                                 >
                                     <img
@@ -183,7 +225,6 @@ const MangoLandingPage = () => {
                             ))}
                         </div>
 
-                        {/* Left Arrow (মাউস হোভার করলে স্ক্রিনে দেখা যাবে) */}
                         <button
                             type="button"
                             onClick={prevSlide}
@@ -194,7 +235,6 @@ const MangoLandingPage = () => {
                             </svg>
                         </button>
 
-                        {/* Right Arrow */}
                         <button
                             type="button"
                             onClick={nextSlide}
@@ -205,7 +245,6 @@ const MangoLandingPage = () => {
                             </svg>
                         </button>
 
-                        {/* Bottom Dots Nav Indicators */}
                         <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2">
                             {sliderImages.map((_, index) => (
                                 <button
@@ -218,9 +257,6 @@ const MangoLandingPage = () => {
                             ))}
                         </div>
                     </div>
-
-
-
                 </div>
             </section>
 
@@ -235,7 +271,6 @@ const MangoLandingPage = () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {/* Card 1 */}
                     <div className="bg-white border border-gray-100 shadow-xl shadow-gray-200/50 rounded-2xl p-6 text-center hover:border-green-500 transition-all duration-300">
                         <div className="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 text-green-600">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
@@ -244,7 +279,6 @@ const MangoLandingPage = () => {
                         <p className="text-gray-600 leading-relaxed">কোনো প্রকার প্রিজারভেটিভ, ফরমালিন বা কার্বাইড ছাড়াই প্রাকৃতিকভাবে পাকানো আম।</p>
                     </div>
 
-                    {/* Card 2 */}
                     <div className="bg-white border border-gray-100 shadow-xl shadow-gray-200/50 rounded-2xl p-6 text-center hover:border-green-500 transition-all duration-300">
                         <div className="w-14 h-14 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4 text-orange-500">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M16.243 17.657l.707.707M6.343 6.364l.707-.707M12 5a7 7 0 100 14 7 7 0 000-14z" /></svg>
@@ -253,7 +287,6 @@ const MangoLandingPage = () => {
                         <p className="text-gray-600 leading-relaxed">অর্ডার পাওয়ার পর সরাসরি গাছ থেকে পেড়ে প্যাকিং করে পাঠিয়ে দেওয়া হয়।</p>
                     </div>
 
-                    {/* Card 3 */}
                     <div className="bg-white border border-gray-100 shadow-xl shadow-gray-200/50 rounded-2xl p-6 text-center hover:border-green-500 transition-all duration-300">
                         <div className="w-14 h-14 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4 text-emerald-600">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
@@ -281,7 +314,6 @@ const MangoLandingPage = () => {
             <main id="order" className="max-w-6xl mx-auto px-4 py-10">
 
                 <div className="bg-white border border-gray-200 shadow-2xl rounded-3xl overflow-hidden">
-                    {/* Checkout Top Bar Banner */}
                     <div className="bg-gradient-to-r from-green-600 to-emerald-600 text-white text-center py-6 px-4">
                         <h2 className="text-xl md:text-3xl font-extrabold">
                             অর্ডারটি সম্পূর্ণ করতে নিচে আপনার সঠিক তথ্য দিন
@@ -369,7 +401,6 @@ const MangoLandingPage = () => {
                                             className={`border rounded-2xl p-4 md:p-5 transition-all flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white ${pkg.selected ? "border-green-500 bg-green-50/30 ring-1 ring-green-500" : "border-gray-200"
                                                 }`}
                                         >
-                                            {/* Left side info */}
                                             <div className="flex items-start gap-3">
                                                 <input
                                                     type="checkbox"
@@ -384,7 +415,6 @@ const MangoLandingPage = () => {
                                                 </label>
                                             </div>
 
-                                            {/* Quantity adjustments */}
                                             {pkg.selected && (
                                                 <div className="flex items-center justify-between w-full md:w-auto gap-4 pt-3 md:pt-0 border-t md:border-t-0 border-gray-100">
                                                     <div className="flex items-center border border-gray-300 rounded-xl bg-white overflow-hidden shadow-sm">
@@ -429,7 +459,6 @@ const MangoLandingPage = () => {
 
                                 <div className="bg-white border border-gray-200/80 rounded-2xl p-5 shadow-sm space-y-4">
 
-                                    {/* Selected Products List */}
                                     <div className="border-b border-gray-100 pb-4 space-y-3">
                                         <div className="flex justify-between font-bold text-gray-500 text-sm tracking-wide">
                                             <span>আইটেম</span>
@@ -448,13 +477,11 @@ const MangoLandingPage = () => {
                                         )}
                                     </div>
 
-                                    {/* Subtotal */}
                                     <div className="flex justify-between font-bold text-gray-700 text-base border-b border-gray-100 pb-3">
                                         <span>সাবটোটাল</span>
                                         <span>৳{subtotal}</span>
                                     </div>
 
-                                    {/* Shipping Radios */}
                                     <div className="border-b border-gray-100 pb-4">
                                         <span className="block font-bold text-gray-700 text-sm mb-2.5">ডেলিভারি লোকেশন</span>
                                         <div className="space-y-2">
@@ -488,7 +515,6 @@ const MangoLandingPage = () => {
                                         </div>
                                     </div>
 
-                                    {/* Grand Total */}
                                     <div className="flex justify-between items-center text-xl md:text-2xl font-black text-gray-900 pt-2">
                                         <span>সর্বমোট প্রদেয়</span>
                                         <span className="text-green-600">৳{grandTotal}</span>
@@ -496,7 +522,6 @@ const MangoLandingPage = () => {
 
                                 </div>
 
-                                {/* COD Badge */}
                                 <div className="mt-5 border border-dashed border-orange-300 rounded-2xl p-4 bg-orange-50/40 flex items-start gap-3">
                                     <span className="text-xl">🤝</span>
                                     <div>
@@ -506,13 +531,23 @@ const MangoLandingPage = () => {
                                 </div>
                             </div>
 
-                            {/* Submit Button */}
                             <div className="mt-8 lg:mt-0">
                                 <button
                                     type="submit"
-                                    className="w-full bg-orange-500 hover:bg-orange-600 text-white font-black md:text-xl text-lg py-4 rounded-xl shadow-xl shadow-orange-500/20 active:scale-[0.99] transition-all"
+                                    disabled={isSubmitting}
+                                    className={`w-full bg-orange-500 hover:bg-orange-600 text-white font-black md:text-xl text-lg py-4 rounded-xl shadow-xl shadow-orange-500/20 active:scale-[0.99] transition-all flex items-center justify-center gap-2 ${isSubmitting ? "opacity-75 cursor-not-allowed" : ""}`}
                                 >
-                                    অর্ডার নিশ্চিত করুন ৳{grandTotal}
+                                    {isSubmitting ? (
+                                        <>
+                                            <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                            </svg>
+                                            অর্ডার প্রসেস হচ্ছে...
+                                        </>
+                                    ) : (
+                                        `অর্ডার নিশ্চিত করুন ৳${grandTotal}`
+                                    )}
                                 </button>
                                 <p className="text-center text-xs text-gray-400 mt-3">
                                     নিরাপদ ও নির্ভরযোগ্য ই-কমার্স সেবার প্রতিশ্রুতি।
@@ -550,23 +585,20 @@ const MangoLandingPage = () => {
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
                     <div className="bg-white rounded-3xl p-6 md:p-8 max-w-md w-full text-center shadow-2xl border border-gray-100 transform scale-100 transition-all duration-300">
 
-                        {/* Success Icon Animation */}
                         <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-5 text-green-600 shadow-inner">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                             </svg>
                         </div>
 
-                        {/* Heading */}
                         <h3 className="text-2xl md:text-3xl font-black text-gray-900 mb-2">
-                            অর্ডারটি সফল হয়েছে!
+                            অর্ডারটি সফল হয়েছে!
                         </h3>
 
                         <p className="text-green-600 font-bold text-lg mb-4">
                             ধন্যবাদ, {formData.name}!
                         </p>
 
-                        {/* Brief Summary Box */}
                         <div className="bg-gray-50 rounded-2xl p-4 text-left text-sm space-y-2 text-gray-600 border border-gray-100 mb-6">
                             <p><span className="font-bold text-gray-800">ফোন নাম্বার:</span> {formData.phone}</p>
                             <p><span className="font-bold text-gray-800">ঠিকানা:</span> {formData.address}</p>
@@ -580,7 +612,6 @@ const MangoLandingPage = () => {
                             আমাদের প্রতিনিধি খুব শীঘ্রই আপনার মোবাইলে কল করে অর্ডারটি কনফার্ম করবেন এবং দ্রুত ডেলিভারির ব্যবস্থা করবেন। অনুগ্রহ করে ফোনটি সচল রাখুন।
                         </p>
 
-                        {/* Close / Continue Button */}
                         <button
                             onClick={handleCloseModal}
                             className="w-full bg-green-600 hover:bg-green-700 text-white font-bold text-lg py-3.5 rounded-xl shadow-lg shadow-green-600/20 active:scale-[0.98] transition-all"
