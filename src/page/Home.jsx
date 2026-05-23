@@ -207,11 +207,11 @@ const MangoLandingPage = () => {
 
                         {/* Social Media Links */}
                         {/* Social Media Links */}
-                     
-                    </div>
-   {/* Social Media Links (Using Pure SVG - 100% Error Free & Fast) */}
 
-   <div className="flex md:gap-10 gap-5 ">
+                    </div>
+                    {/* Social Media Links (Using Pure SVG - 100% Error Free & Fast) */}
+
+                    <div className="flex md:gap-10 gap-5 ">
 
                         <div className="flex items-center md:gap-10 gap-5">
 
@@ -253,11 +253,11 @@ const MangoLandingPage = () => {
 
                         </div>
 
-                    {/* Right Side: Order Button */}
-                    <a href="#order" className="bg-orange-500 hover:bg-orange-600 text-white font-bold md:px-4 md:py-2 px-2 py-1 rounded-full transition-all duration-200 transform hover:scale-105 shadow-md text-[14px] md:text-base">
-                        অর্ডার করুন
-                    </a>
-   </div>
+                        {/* Right Side: Order Button */}
+                        <a href="#order" className="bg-orange-500 hover:bg-orange-600 text-white font-bold md:px-4 md:py-2 px-2 py-1 rounded-full transition-all duration-200 transform hover:scale-105 shadow-md text-[14px] md:text-base">
+                            অর্ডার করুন
+                        </a>
+                    </div>
 
                 </div>
             </header>
@@ -267,10 +267,10 @@ const MangoLandingPage = () => {
 
                 {/* Background Image */}
                 <div
-                    className="absolute inset-0 bg-cover bg-center scale-105 blur-[4px]"
+                    className="absolute inset-0 bg-cover bg-center scale-105 blur-[0px]"
                     style={{
                         backgroundImage:
-                            "url('https://7vgva7cju0vcfvwf.public.blob.vercel-storage.com/IMG_20260523_165905.jpg.jpeg')"
+                            "url('https://7vgva7cju0vcfvwf.public.blob.vercel-storage.com/IMG_20260523_165645.jpg.jpeg')"
                     }}
                 ></div>
 
@@ -283,81 +283,98 @@ const MangoLandingPage = () => {
                 {/* Content */}
                 <div className="max-w-6xl md:px-5 mx-auto grid grid-cols-1 md:grid-cols-2 gap-5 items-center relative z-10">
 
+
+
                     {/* LEFT CONTENT */}
-                    <div className="text-center md:text-left space-y-6">
+                    <div className="relative z-10 max-w-2xl text-center md:text-left">
 
-                        <span className="inline-block bg-orange-500 text-xs md:text-sm font-bold tracking-wide uppercase px-3 py-1 rounded-full animate-pulse">
-                            ১০০% ন্যাচারাল ও কেমিক্যাল মুক্ত
-                        </span>
+                        {/* Glass Card */}
+                        <div className="bg-black/35  border border-white/10 rounded-3xl p-5  shadow-2xl">
 
-                        <h1 className="text-4xl md:text-6xl font-black leading-tight drop-shadow-sm">
-                            সরাসরি রাজশাহীর বাগান থেকে{" "}
-                            <span className="text-orange-400">
-                                ফ্রেশ আম
-                            </span>{" "}
-                            আপনার দরজায়!
-                        </h1>
+                            {/* Top Badge */}
+                            <div className="inline-flex items-center gap-2 bg-green-500 border border-emerald-400/20 text-white text-xs md:text-sm font-bold tracking-wider uppercase px-4 py-2 rounded-full mb-5">
+                                <span className="relative flex h-2.5 w-2.5">
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+                                </span>
 
-                        <p className="text-emerald-100 text-md md:text-xl font-medium leading-relaxed max-w-lg">
-                            গাছপাকা অতুলনীয় মিষ্টি ও সুস্বাদু আমের আসল স্বাদ নিতে আজই আপনার পছন্দের প্যাকেজটি বুকিং করুন।
-                        </p>
+                                ১০০% ন্যাচারাল ও কেমিক্যাল মুক্ত
+                            </div>
 
-                        <div className="pt-2">
+                            {/* Main Heading */}
+                            <h1 className="text-4xl md:text-5xl font-black leading-tight text-white drop-shadow-[0_5px_20px_rgba(0,0,0,0.8)]">
+                                সরাসরি রাজশাহীর বাগান থেকে{" "}
+                                <span className="text-orange-400">
+                                    ফ্রেশ আম
+                                </span>{" "} <br/>
+                                আপনার দরজায়!
+                            </h1>
 
-                            <a
-                                href="#order"
-                                className="inline-block bg-orange-500 hover:bg-orange-600 text-white text-lg md:text-2xl font-extrabold px-10 md:py-4 py-2.5 rounded-xl shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-                            >
-                                অর্ডার করতে ক্লিক করুন ➔
-                            </a>
+                            {/* Description */}
+                            <p className="mt-5 text-gray-200 text-base md:text-xl leading-relaxed max-w-xl">
+                                গাছপাকা অতুলনীয় মিষ্টি ও সুস্বাদু আমের আসল স্বাদ নিতে আজই
+                                আপনার পছন্দের প্যাকেজটি বুকিং করুন।
+                            </p>
 
+                            {/* Action Buttons */}
+                            <div className="mt-7 flex flex-col sm:flex-row items-center md:items-start gap-4">
+
+                                {/* Order Button */}
+                                <a
+                                    href="#order"
+                                    className="group inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white text-lg md:text-xl font-extrabold px-8 py-3.5 rounded-2xl shadow-[0_10px_30px_rgba(249,115,22,0.35)] transition-all duration-300 hover:-translate-y-1"
+                                >
+                                    অর্ডার করুন
+                                    <span className="group-hover:translate-x-1 transition-transform duration-300">
+                                        →
+                                    </span>
+                                </a>
+
+                                {/* Hotline Button */}
+                                <a
+                                    href="tel:+8801773820336"
+                                    className="group inline-flex items-center gap-3 bg-white/10 hover:bg-white/15 backdrop-blur-xl border border-white/10 hover:border-emerald-400/30 px-5 py-2 rounded-2xl transition-all duration-300 shadow-lg"
+                                >
+
+                                    {/* Live Indicator */}
+                                    <span className="relative flex h-3 w-3">
+                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                        <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-400"></span>
+                                    </span>
+
+                                    {/* Text */}
+                                    <div className="flex flex-col text-left leading-none">
+                                        <span className="text-[10px] md:text-xs uppercase tracking-[2px] text-emerald-300 font-bold mb-1">
+                                            Hotline Support
+                                        </span>
+
+                                        <span className="text-white font-black tracking-wider text-lg group-hover:text-emerald-300 transition-colors">
+                                            01773-820336
+                                        </span>
+                                    </div>
+
+                                    {/* Phone Icon */}
+                                    <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            strokeWidth={2.2}
+                                            stroke="currentColor"
+                                            className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a1.5 1.5 0 001.5-1.5v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106a1.5 1.5 0 00-1.465.417l-.97.97a12.035 12.035 0 01-5.303-5.303l.97-.97a1.5 1.5 0 00.417-1.465L8.213 3.852A1.125 1.125 0 007.122 3H5.75a1.5 1.5 0 00-1.5 1.5v2.25z"
+                                            />
+                                        </svg>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                        {/* Phone Number Button (Click-to-Call with Live SVG Icon) */}
+                    </div>
 
-
-{/* Premium E-commerce Hotline Button with Live Active Status */}
-<div className="flex justify-center md:justify-normal">
-<a 
-    href="tel:+8801773820336" 
-    className="relative md:w-58 flex items-center gap-2.5 bg-gradient-to-r from-slate-900 to-emerald-950 hover:from-emerald-900 hover:to-slate-900 text-white font-bold px-4 py-2.5 rounded-2xl border border-emerald-500/30 shadow-[0_0_20px_rgba(16,185,129,0.1)] hover:shadow-[0_0_25px_rgba(16,185,129,0.25)] transition-all duration-300 group text-sm md:text-base group"
->
-    {/* Live Pulse Indicator (অনলাইন ট্রাস্ট ফ্যাক্টর) */}
-    <span className="relative flex h-2.5 w-2.5">
-        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-    </span>
-
-    <div className="flex flex-col text-left leading-none">
-        {/* টপ ক্যাচফেজ লাইন */}
-        <span className="text-[10px] md:text-[14px] text-emerald-400 uppercase tracking-widest font-black mb-0.5">
-            হটলাইন (অর্ডার)
-        </span>
-        
-        {/* লাইভ নাম্বার */}
-        <span className="font-black tracking-wider text-[15px] md:text-[18px] text-gray-100 group-hover:text-emerald-300 transition-colors">
-            01773-820336
-        </span>
-    </div>
-
-    {/* Calling SVG Icon with Micro-Rotation on Hover */}
-    <div className="p-1.5 bg-emerald-500/10 rounded-lg text-emerald-400 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300">
-        <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            viewBox="0 0 24 24" 
-            fill="none" 
-            stroke="currentColor" 
-            strokeWidth="2.5" 
-            strokeLinecap="round" 
-            strokeLinejoin="round" 
-            className="w-3.5 h-3.5 md:w-4 md:h-4 transform group-hover:rotate-12 transition-transform duration-300"
-        >
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-        </svg>
-    </div>
-</a>
-    
-</div>
-                </div>
 
                     {/* RIGHT SLIDER */}
                     <div className=" hidden flex md:pl-5 justify-center relative group w-full max-w-[350px] mx-auto">
