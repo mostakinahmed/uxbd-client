@@ -192,7 +192,7 @@ const MangoLandingPage = () => {
                 <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
                     <div className="flex items-center gap-2">
                         <span className="md:text-3xl text-2xl">🥭</span>
-                        <span className="md:text-2xl text-xl font-black text-green-600 tracking-tight">Unique<span className="text-orange-500">Express</span></span>
+                        <span className="md:text-2xl text-xl font-black text-green-600 tracking-tight">Unique<span className="text-orange-500">Xpress</span></span>
                     </div>
                     <a href="#order" className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-4 py-2 rounded-full transition-all duration-200 transform hover:scale-105 shadow-md text-[14px] md:text-base">
                         অর্ডার করুন
