@@ -5,33 +5,33 @@ const MangoLandingPage = () => {
     const initialPackages = [
         {
             id: 1,
-            name: "রেগুলার ম্যাঙ্গো প্যাক (হিমসাগর + ল্যাংড়া)",
-            pricePerKg: 150,
+            name: "হিমসাগর আম",
+            pricePerKg: 130,
             quantity: 12,
-            selected: true,
-            minQty: 5
+            selected: false,
+            minQty: 12
         },
         {
             id: 2,
-            name: "প্রিমিয়াম ফ্যামিলি প্যাক (হিমসাগর + ফজলি)",
-            pricePerKg: 180,
+            name: "গোপালভোগ আম",
+            pricePerKg: 150,
             quantity: 12,
             selected: false,
-            minQty: 5
+            minQty: 12
         },
         {
             id: 3,
-            name: "মেগা ফিস্ট উৎসব প্যাক (মিক্সড প্রিমিয়াম আম)",
-            pricePerKg: 220,
+            name: "(হিমসাগর + গোপালভোগ) প্যাকেজ",
+            pricePerKg: 140,
             quantity: 12,
             selected: false,
-            minQty: 10
+            minQty: 12
         }
     ];
 
     // States
     const [packages, setPackages] = useState(initialPackages);
-    const [shippingCost, setShippingCost] = useState(60); // Default Inside Dhaka ৳60
+    const [shippingCost, setShippingCost] = useState(200); // Default Inside Dhaka ৳60
     const [formData, setFormData] = useState({
         name: "",
         address: "",
@@ -109,8 +109,8 @@ const MangoLandingPage = () => {
         };
 
         try {
-           
-            
+
+
             // Axios.post সরাসরি URL এবং পেলোড অবজেক্ট ইনপুট নেয়
             const response = await axios.post("https://uxbd.vercel.app/api/orders", orderPayload);
 
@@ -132,31 +132,31 @@ const MangoLandingPage = () => {
             setIsSubmitting(false);
         }
     };
-const handleCloseModal = () => {
+    const handleCloseModal = () => {
 
-    setShowSuccessModal(false);
+        setShowSuccessModal(false);
 
-    // Reset Form
-    setFormData({
-        name: "",
-        address: "",
-        phone: "",
-        notes: ""
-    });
+        // Reset Form
+        setFormData({
+            name: "",
+            address: "",
+            phone: "",
+            notes: ""
+        });
 
-    // Reset Packages
-    setPackages(initialPackages);
+        // Reset Packages
+        setPackages(initialPackages);
 
-    // Reset Shipping
-    setShippingCost(60);
+        // Reset Shipping
+        setShippingCost(60);
 
-    // Scroll To Top
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-};
-  
+        // Scroll To Top
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    };
+
 
     const sliderImages = [
         { id: 1, src: "https://scontent.fdac110-1.fna.fbcdn.net/v/t39.30808-6/305219786_430802175823626_6234519217026664526_n.png?_nc_cat=107&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=8cKPzORpMM4Q7kNvwH4sZQW&_nc_oc=AdrT2XTUG66WmtXsUt7IhcPka4wPdZbWaXDA2C6UEzPbIZlUZLTFeVKSwdSMBBHJ864&_nc_zt=23&_nc_ht=scontent.fdac110-1.fna&_nc_gid=-K9gw8IJNQVTglllaxcu-A&_nc_ss=7b2a8&oh=00_Af6qZ8EpRnsKXtQ8r4Ku5Jg0IH_pEClPmX-xfyVQVEBMPA&oe=6A15C2D4", alt: "Fresh Rajshahi Mangoes 1" },
@@ -192,7 +192,7 @@ const handleCloseModal = () => {
                 <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
                     <div className="flex items-center gap-2">
                         <span className="md:text-3xl text-2xl">🥭</span>
-                        <span className="md:text-2xl text-xl font-black text-green-600 tracking-tight">Unique<span className="text-orange-500">ExpressBD</span></span>
+                        <span className="md:text-2xl text-xl font-black text-green-600 tracking-tight">Unique<span className="text-orange-500">Express</span></span>
                     </div>
                     <a href="#order" className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-4 py-2 rounded-full transition-all duration-200 transform hover:scale-105 shadow-md text-[14px] md:text-base">
                         অর্ডার করুন
@@ -501,35 +501,30 @@ const handleCloseModal = () => {
                                     </div>
 
                                     <div className="border-b border-gray-100 pb-4">
-                                        <span className="block font-bold text-gray-700 text-sm mb-2.5">ডেলিভারি লোকেশন</span>
+                                        
                                         <div className="space-y-2">
-                                            <label className="flex items-center justify-between border border-gray-200 p-3 rounded-xl bg-gray-50/50 cursor-pointer hover:bg-white transition">
-                                                <div className="flex items-center gap-2.5">
-                                                    <input
-                                                        type="radio"
-                                                        name="shipping"
-                                                        checked={shippingCost === 60}
-                                                        onChange={() => setShippingCost(60)}
-                                                        className="h-4 w-4 text-green-600 focus:ring-green-500"
-                                                    />
-                                                    <span className="font-semibold text-gray-800 text-sm">ঢাকার ভেতরে</span>
-                                                </div>
-                                                <span className="font-bold text-gray-700 text-sm">৳৬০</span>
-                                            </label>
 
-                                            <label className="flex items-center justify-between border border-gray-200 p-3 rounded-xl bg-gray-50/50 cursor-pointer hover:bg-white transition">
-                                                <div className="flex items-center gap-2.5">
-                                                    <input
-                                                        type="radio"
-                                                        name="shipping"
-                                                        checked={shippingCost === 120}
-                                                        onChange={() => setShippingCost(120)}
-                                                        className="h-4 w-4 text-green-600 focus:ring-green-500"
-                                                    />
-                                                    <span className="font-semibold text-gray-800 text-sm">ঢাকার বাইরে</span>
+
+                                            <div className="flex items-center justify-between border border-green-200 p-4 rounded-xl bg-green-50">
+
+                                                <div>
+                                                    <p className="font-bold text-gray-800 text-sm">
+                                                        সারা বাংলাদেশ ডেলিভারি চার্জ
+                                                    </p>
+
+                                                    <p className="text-xs text-gray-500 mt-1">
+                                                        সকল জেলার জন্য নির্ধারিত চার্জ
+                                                    </p>
                                                 </div>
-                                                <span className="font-bold text-gray-700 text-sm">৳১২০</span>
-                                            </label>
+
+                                                <span className="font-extrabold text-green-600 text-lg">
+                                                    ৳200
+                                                </span>
+
+                                            </div>
+
+
+
                                         </div>
                                     </div>
 
