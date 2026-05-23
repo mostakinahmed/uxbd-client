@@ -132,14 +132,30 @@ const MangoLandingPage = () => {
             setIsSubmitting(false);
         }
     };
+const handleCloseModal = () => {
 
-  // Close Modal and Reload Page
-    const handleCloseModal = () => {
-        setShowSuccessModal(false);
-        
-        // ⚡ এই লাইনটি পেজকে অটোমেটিক রিলোড করবে
-        window.location.reload(); 
-    };
+    setShowSuccessModal(false);
+
+    // Reset Form
+    setFormData({
+        name: "",
+        address: "",
+        phone: "",
+        notes: ""
+    });
+
+    // Reset Packages
+    setPackages(initialPackages);
+
+    // Reset Shipping
+    setShippingCost(60);
+
+    // Scroll To Top
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+};
   
 
     const sliderImages = [
