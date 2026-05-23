@@ -109,7 +109,7 @@ const MangoLandingPage = () => {
         };
 
         try {
-            console.log(orderPayload);
+           
             
             // Axios.post সরাসরি URL এবং পেলোড অবজেক্ট ইনপুট নেয়
             const response = await axios.post("https://uxbd.vercel.app/api/orders", orderPayload);
@@ -133,12 +133,14 @@ const MangoLandingPage = () => {
         }
     };
 
-    // Close Modal and Reset Form
+  // Close Modal and Reload Page
     const handleCloseModal = () => {
         setShowSuccessModal(false);
-        setFormData({ name: "", address: "", phone: "", notes: "" });
-        setPackages(initialPackages);
+        
+        // ⚡ এই লাইনটি পেজকে অটোমেটিক রিলোড করবে
+        window.location.reload(); 
     };
+  
 
     const sliderImages = [
         { id: 1, src: "https://scontent.fdac110-1.fna.fbcdn.net/v/t39.30808-6/305219786_430802175823626_6234519217026664526_n.png?_nc_cat=107&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=8cKPzORpMM4Q7kNvwH4sZQW&_nc_oc=AdrT2XTUG66WmtXsUt7IhcPka4wPdZbWaXDA2C6UEzPbIZlUZLTFeVKSwdSMBBHJ864&_nc_zt=23&_nc_ht=scontent.fdac110-1.fna&_nc_gid=-K9gw8IJNQVTglllaxcu-A&_nc_ss=7b2a8&oh=00_Af6qZ8EpRnsKXtQ8r4Ku5Jg0IH_pEClPmX-xfyVQVEBMPA&oe=6A15C2D4", alt: "Fresh Rajshahi Mangoes 1" },
