@@ -118,10 +118,21 @@ const MangoLandingPage = () => {
             // Axios-এর রেসপন্স ডাটা সরাসরি .data প্রপার্টিতে থাকে
             const result = response.data;
 
+
             if (result.success) {
-                // সফল হলে সাকসেস মোডাল পপ-আপ ট্রিগার হবে
+
+                if (window.fbq) {
+                    window.fbq('track', 'Purchase', {
+                        value: totalPrice,
+                        currency: 'BDT'
+                    });
+                }
+
                 setShowSuccessModal(true);
-            } else {
+            }
+
+
+            else {
                 alert(result.message || "অর্ডার প্রসেস করতে সমস্যা হয়েছে। আবার চেষ্টা করুন।");
             }
         } catch (error) {
@@ -133,6 +144,8 @@ const MangoLandingPage = () => {
             setIsSubmitting(false);
         }
     };
+
+    
     const handleCloseModal = () => {
 
         setShowSuccessModal(false);
@@ -306,7 +319,7 @@ const MangoLandingPage = () => {
                                 সরাসরি রাজশাহীর বাগান থেকে{" "}
                                 <span className="text-orange-400">
                                     ফ্রেশ আম
-                                </span>{" "} <br/>
+                                </span>{" "} <br />
                                 আপনার দরজায়!
                             </h1>
 
