@@ -123,7 +123,7 @@ const MangoLandingPage = () => {
 
                 if (window.fbq) {
                     window.fbq('track', 'Purchase', {
-                        value: totalPrice,
+                        value: grandTotal,
                         currency: 'BDT'
                     });
                 }
@@ -145,7 +145,7 @@ const MangoLandingPage = () => {
         }
     };
 
-    
+
     const handleCloseModal = () => {
 
         setShowSuccessModal(false);
