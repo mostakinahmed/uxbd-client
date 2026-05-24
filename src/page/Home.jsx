@@ -345,7 +345,7 @@ const MangoLandingPage = () => {
 
                                 {/* Hotline Button */}
                                 <a
-                                    href="tel:+8801773820336"
+                                    href="tel:+8801817645283"
                                     className="group inline-flex items-center gap-3 bg-white/10 hover:bg-white/15 backdrop-blur-xl border border-white/10 hover:border-emerald-400/30 px-5 py-2 rounded-2xl transition-all duration-300 shadow-lg"
                                 >
 
