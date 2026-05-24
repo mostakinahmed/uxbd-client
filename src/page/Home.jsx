@@ -230,7 +230,7 @@ const MangoLandingPage = () => {
 
                             {/* Facebook Link */}
                             <a
-                                href="https://facebook.com/your-page-link" // 👈 এখানে আপনার ফেসবুক পেজের লিংক দিন
+                                href="https://www.facebook.com/share/1DZbL2TwDw/" // 👈 এখানে আপনার ফেসবুক পেজের লিংক দিন
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className=" text-[#1877F2] hover:bg-blue-50 rounded-full transition-all duration-200 flex items-center justify-center"
@@ -248,7 +248,7 @@ const MangoLandingPage = () => {
 
                             {/* WhatsApp Link */}
                             <a
-                                href="https://wa.me/88017XXXXXXXX" // 👈 কান্ট্রি কোডসহ (880) আপনার হোয়াটসঅ্যাপ নাম্বার দিন
+                                href="https://wa.me/+8801817645283" // 👈 কান্ট্রি কোডসহ (880) আপনার হোয়াটসঅ্যাপ নাম্বার দিন
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className=" text-[#25D366] hover:bg-green-50 rounded-full transition-all duration-200 flex items-center justify-center"
@@ -362,7 +362,7 @@ const MangoLandingPage = () => {
                                         </span>
 
                                         <span className="text-white font-black tracking-wider text-lg group-hover:text-emerald-300 transition-colors">
-                                            01773-820336
+                                            01817645283
                                         </span>
                                     </div>
 
