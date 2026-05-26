@@ -280,10 +280,18 @@ const MangoLandingPage = () => {
 
                 {/* Background Image */}
                 <div
-                    className="absolute inset-0 bg-cover bg-center scale-105 blur-[0px]"
+                    className="absolute hidden md:block inset-0 bg-cover bg-center scale-105 blur-[2px]"
                     style={{
                         backgroundImage:
                             "url('https://7vgva7cju0vcfvwf.public.blob.vercel-storage.com/IMG_20260523_165645.jpg.jpeg')"
+                    }}
+                ></div>
+
+                 <div
+                    className="absolute md:hidden inset-0 bg-cover bg-center scale-105 blur-[1px]"
+                    style={{
+                        backgroundImage:
+                            "url(' https://7vgva7cju0vcfvwf.public.blob.vercel-storage.com/IMG_20260524_210405.jpg%20%281%29.jpeg')"
                     }}
                 ></div>
 
