@@ -3,31 +3,31 @@ import React from "react";
 const photos = [
   {
     id: 1,
-    title: "Office Setup",
+    title: "হিমসাগর /খিসরাপাত",
     image:
       " https://7vgva7cju0vcfvwf.public.blob.vercel-storage.com/WhatsApp%20Image%202026-05-26%20at%203.34.55%20PM.jpeg",
   },
   {
     id: 2,
-    title: "Team Meeting",
+    title: "হিমসাগর /খিসরাপাত",
     image:
       "https://7vgva7cju0vcfvwf.public.blob.vercel-storage.com/WhatsApp%20Image%202026-05-26%20at%203.34.55%20PM%20%281%29.jpeg",
   },
   {
     id: 3,
-    title: "Workspace",
+    title: "হিমসাগর /খিসরাপাত",
     image:
       "https://7vgva7cju0vcfvwf.public.blob.vercel-storage.com/WhatsApp%20Image%202026-05-26%20at%203.34.56%20PM%20%281%29.jpeg",
   },
   {
     id: 4,
-    title: "Creative Design",
+    title: "গোপালভোগ",
     image:
       "https://7vgva7cju0vcfvwf.public.blob.vercel-storage.com/WhatsApp%20Image%202026-05-26%20at%203.34.56%20PM.jpeg",
   },
   {
     id: 5,
-    title: "Development",
+    title: "গোপালভোগ",
     image:
       "https://7vgva7cju0vcfvwf.public.blob.vercel-storage.com/WhatsApp%20Image%202026-05-26%20at%203.34.56%20PM%20%282%29.jpeg",
   },
