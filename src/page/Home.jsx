@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios"; // ⚡ এই লাইনটি ফাইলের একদম উপরে যুক্ত করুন
+import PhotosSection from "./PhotosSection";
 
 const MangoLandingPage = () => {
     // Packages Data
@@ -48,7 +49,6 @@ const MangoLandingPage = () => {
             pkg.id === id ? { ...pkg, selected: !pkg.selected } : pkg
         ));
     };
-
     // Increment Weight
     const incrementQty = (id) => {
         setPackages(packages.map(pkg =>
@@ -280,7 +280,7 @@ const MangoLandingPage = () => {
 
                 {/* Background Image */}
                 <div
-                    className="absolute hidden md:block inset-0 bg-cover bg-center scale-105 blur-[2px]"
+                    className="absolute hidden md:block inset-0 bg-cover bg-center scale-105 blur-[3px]"
                     style={{
                         backgroundImage:
                             "url('https://7vgva7cju0vcfvwf.public.blob.vercel-storage.com/IMG_20260523_165645.jpg.jpeg')"
@@ -310,7 +310,7 @@ const MangoLandingPage = () => {
                     <div className="relative z-10 max-w-2xl text-center md:text-left">
 
                         {/* Glass Card */}
-                        <div className="bg-black/35  border border-white/10 rounded-3xl p-5  shadow-2xl">
+                        <div className="bg-black/50  border border-white/10 rounded-3xl p-5  shadow-2xl">
 
                             {/* Top Badge */}
                             <div className="inline-flex items-center gap-2 bg-green-500 border border-emerald-400/20 text-white text-xs md:text-sm font-bold tracking-wider uppercase px-4 py-2 rounded-full mb-5">
@@ -433,6 +433,7 @@ const MangoLandingPage = () => {
             </section>
 
 
+<section><PhotosSection/></section>
 
             {/* Features/Benefits Grid */}
             <section className="max-w-6xl mx-auto px-4 py-16">
